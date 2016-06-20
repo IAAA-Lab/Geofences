@@ -1,0 +1,5 @@
+include 'api-spec'
+include 'geofencing'
+include 'geofencing-location'
+include 'geofencing-manager'
+include 'spring-boot-spatial'

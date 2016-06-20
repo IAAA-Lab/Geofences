@@ -1,0 +1,66 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Login</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <meta charset="utf-8"/>
+    <link th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet"/>
+    <link th:href="@{/css/form-elements.css}" href="../static/css/form-elements.css"
+          rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" href="../static/css/style.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+
+<div class="top-content">
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1>Geofencing Manager</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <h3>Login</h3>
+                            <p>Enter your nick and password</p>
+                        </div>
+                        <div class="form-top-right">
+                            <span class="glyphicon glyphicon-lock"></span>
+                        </div>
+                    </div>
+                    <div class="form-medium">
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <label class="sr-only" for="username">Nick</label>
+                                <input type="text" name="username" placeholder="Nick..."
+                                       class="form-username form-control" id="username"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="password">Password</label>
+                                <input type="password" name="password"
+                                       placeholder="Password..." class="form-password form-control"
+                                       id="password"/>
+                            </div>
+                            <button type="submit" class="btn">Sign in!
+                            </button>
+                        </form>
+                    </div>
+                    <div class="form-bottom">
+                        <h5>New to Geofencing Manager? <a href="/sign-up">Create an account</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery.js}" src="../static/js/jquery.js"></script>
+<script th:src="@{/js/bootstrap.js}" src="../static/js/bootstrap.js"></script>
+<script th:src="@{/js/core.js}" src="../static/js/core.js"></script>
+</body>
+</html>

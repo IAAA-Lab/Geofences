@@ -1,0 +1,1328 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Name of the App API",
+        "description": "Use our services using this API",
+        "version": "1.0.0"
+    },
+    "host": "api.app.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/users": {
+            "post": {
+                "summary": "Create user",
+                "description": "This method creates a new user.\n",
+                "parameters": [
+                    {
+                        "name": "public_identifier",
+                        "in": "query",
+                        "description": "Public identifier of the user.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email of the user.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pass",
+                        "in": "query",
+                        "description": "Password of the user.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "query",
+                        "description": "First name of the user.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_surname",
+                        "in": "query",
+                        "description": "Last name of the user.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "birthday",
+                        "in": "query",
+                        "description": "Date of the user's birthday.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "imei",
+                        "in": "query",
+                        "description": "Unique identifier from the user's device.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User created",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{public_identifier}": {
+            "put": {
+                "summary": "Modify user",
+                "description": "This method modifies the data of a previously created user.\n",
+                "parameters": [
+                    {
+                        "name": "public_identifier",
+                        "in": "path",
+                        "description": "Public identifier of the user.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email of the user.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pass",
+                        "in": "query",
+                        "description": "Password of the user.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "query",
+                        "description": "First name of the user.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_surname",
+                        "in": "query",
+                        "description": "Last name of the user.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "birthday",
+                        "in": "query",
+                        "description": "Date of the user's birthday.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "imei",
+                        "in": "query",
+                        "description": "Unique identifier from the user's device.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "202": {
+                        "description": "User's data modified",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "304": {
+                        "description": "User's data not modified",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete user",
+                "description": "This method deletes the data of a previously created user.\n",
+                "parameters": [
+                    {
+                        "name": "public_identifier",
+                        "in": "path",
+                        "description": "Public identifier of the user.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get user",
+                "description": "This method returns a user by public identifier.\n",
+                "parameters": [
+                    {
+                        "name": "public_identifier",
+                        "in": "path",
+                        "description": "Public identifier of the user.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User with public identifier requested",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/login": {
+            "get": {
+                "summary": "Login user",
+                "description": "This method logs user into the system.\n",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email of the user.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pass",
+                        "in": "query",
+                        "description": "Password of the user.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User logged in",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid user/password",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/logout": {
+            "get": {
+                "summary": "Logout user",
+                "description": "This method logs user out of the system.\n",
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "User logged out"
+                    }
+                }
+            }
+        },
+        "/geofences": {
+            "post": {
+                "summary": "Create geofence",
+                "description": "This method creates a new geofence.\n",
+                "parameters": [
+                    {
+                        "name": "geofence_id",
+                        "in": "query",
+                        "description": "Unique identifier representing a specific geofence.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type_feature",
+                        "in": "query",
+                        "description": "Type of the feature.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of the geofence.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type_geometry",
+                        "in": "query",
+                        "description": "Type of the object.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "coordinates",
+                        "in": "query",
+                        "description": "Pair of coordinates describing positions.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Geofences"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Geofence created",
+                        "schema": {
+                            "$ref": "#/definitions/Geofence"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get an array of geofences",
+                "description": "This method returns an array of those geofences that are inside of an area generated by an specific point and a radius.\n",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Maximum of geofences to be returned",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Latitude of a specific point.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Longitude of a specific point.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "radius",
+                        "in": "query",
+                        "description": "Distance to determine the area of a circle, taking the specific point as the center of this circle.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "Geofences"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Geofences inside of the area",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Geofence"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Geofences not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/geofences/{geofence_id}": {
+            "put": {
+                "summary": "Modify geofence",
+                "description": "This method modifies the data of a previously created geofence.\n",
+                "parameters": [
+                    {
+                        "name": "geofence_id",
+                        "in": "path",
+                        "description": "Unique identifier representing a specific geofence.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type_feature",
+                        "in": "query",
+                        "description": "Type of the feature.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of the geofence.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type_geometry",
+                        "in": "query",
+                        "description": "Type of the object.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "coordinates",
+                        "in": "query",
+                        "description": "Pair of coordinates describing positions.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Geofences"
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Geofence's data modified",
+                        "schema": {
+                            "$ref": "#/definitions/Geofence"
+                        }
+                    },
+                    "304": {
+                        "description": "Geofence's data not modified",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Geofence not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete geofence",
+                "description": "This method deletes the data of a previously created geofence.\n",
+                "parameters": [
+                    {
+                        "name": "geofence_id",
+                        "in": "path",
+                        "description": "Unique identifier representing a specific geofence.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Geofences"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Geofence deleted",
+                        "schema": {
+                            "$ref": "#/definitions/Geofence"
+                        }
+                    },
+                    "404": {
+                        "description": "Geofence not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get geofence by geofence_id",
+                "description": "This method returns a geofence by geofence_id.\n",
+                "parameters": [
+                    {
+                        "name": "geofence_id",
+                        "in": "path",
+                        "description": "Unique identifier representing a specific geofence.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Geofences"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Geofence with geofence_id requested",
+                        "schema": {
+                            "$ref": "#/definitions/Geofence"
+                        }
+                    },
+                    "404": {
+                        "description": "Geofence not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/notifications": {
+            "post": {
+                "summary": "Create notification",
+                "description": "This method creates a new notification.\n",
+                "parameters": [
+                    {
+                        "name": "notification_id",
+                        "in": "query",
+                        "description": "Unique identifier representing a specific notification.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "creator",
+                        "in": "query",
+                        "description": "Creator of the notification.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "Title of the notification.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "query",
+                        "description": "Body of the notification.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Notifications"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Notification created",
+                        "schema": {
+                            "$ref": "#/definitions/Notification"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get an array of notifications",
+                "description": "This method returns an array of those notifications that haven't been received yet by a certain user.\n",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "Owner of the notifications to be returned.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Notifications"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Notifications that haven't been received yet",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Notification"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Notification not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/notifications/{notification_id}": {
+            "put": {
+                "summary": "Modify notification",
+                "description": "This method modifies the data of a previously created notification.\n",
+                "parameters": [
+                    {
+                        "name": "notification_id",
+                        "in": "path",
+                        "description": "Unique identifier representing a specific notification.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "creator",
+                        "in": "query",
+                        "description": "Creator of the notification.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "Title of the notification.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "query",
+                        "description": "Body of the notification.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Notifications"
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Notification's data modified",
+                        "schema": {
+                            "$ref": "#/definitions/Notification"
+                        }
+                    },
+                    "304": {
+                        "description": "Notification's data not modified",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Notification not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete notification",
+                "description": "This method deletes the data of a previously created notification.\n",
+                "parameters": [
+                    {
+                        "name": "notification_id",
+                        "in": "path",
+                        "description": "Unique identifier representing a specific notification.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "creator",
+                        "in": "query",
+                        "description": "Creator of the notification.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Notifications"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Notification deleted",
+                        "schema": {
+                            "$ref": "#/definitions/Notification"
+                        }
+                    },
+                    "404": {
+                        "description": "Notification not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get notification by notification_id",
+                "description": "This method returns a notification by notification_id.\n",
+                "parameters": [
+                    {
+                        "name": "notification_id",
+                        "in": "path",
+                        "description": "Unique identifier representing a specific notification.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "creator",
+                        "in": "query",
+                        "description": "Creator of the notification.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Notifications"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Notification with notification_id requested",
+                        "schema": {
+                            "$ref": "#/definitions/Notification"
+                        }
+                    },
+                    "404": {
+                        "description": "Notification not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/rules": {
+            "post": {
+                "summary": "Create rule",
+                "description": "This method creates a new rule.\n",
+                "parameters": [
+                    {
+                        "name": "rule_id",
+                        "in": "query",
+                        "description": "Unique identifier representing a specific rule.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "near_enter",
+                        "in": "query",
+                        "description": "Near from the geofence, entering.",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "near_leave",
+                        "in": "query",
+                        "description": "Near from the geofence, leaving.",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "enter",
+                        "in": "query",
+                        "description": "Entering the geofence.",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "leave",
+                        "in": "query",
+                        "description": "Leaving the geofence.",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "inside",
+                        "in": "query",
+                        "description": "Inside of the geofence.",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "distance",
+                        "in": "query",
+                        "description": "Distance from the geofence.",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "time",
+                        "in": "query",
+                        "description": "Time of waiting.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "Rules"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Rule created",
+                        "schema": {
+                            "$ref": "#/definitions/Rule"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get an array of rules",
+                "description": "This method returns an array of rules from a certain user.\n",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "Owner of the rules to be returned.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Rules"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Rules from the user",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Rule"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Rule not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/rules/{rule_id}": {
+            "put": {
+                "summary": "Modify rule",
+                "description": "This method modifies the data of a previously created rule.\n",
+                "parameters": [
+                    {
+                        "name": "rule_id",
+                        "in": "path",
+                        "description": "Unique identifier representing a specific rule.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "near_enter",
+                        "in": "query",
+                        "description": "Near from the geofence, entering.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "near_leave",
+                        "in": "query",
+                        "description": "Near from the geofence, leaving.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "enter",
+                        "in": "query",
+                        "description": "Entering the geofence.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "leave",
+                        "in": "query",
+                        "description": "Leaving the geofence.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "inside",
+                        "in": "query",
+                        "description": "Inside of the geofence.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "distance",
+                        "in": "query",
+                        "description": "Distance from the geofence.",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "time",
+                        "in": "query",
+                        "description": "Time of waiting.",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "Rules"
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Rule's data modified",
+                        "schema": {
+                            "$ref": "#/definitions/Rule"
+                        }
+                    },
+                    "304": {
+                        "description": "Rule's data not modified",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Rule not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete rule",
+                "description": "This method deletes the data of a previously created rule.\n",
+                "parameters": [
+                    {
+                        "name": "rule_id",
+                        "in": "path",
+                        "description": "Unique identifier representing a specific rule.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "creator",
+                        "in": "query",
+                        "description": "Creator of the rule.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Rules"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Rule deleted",
+                        "schema": {
+                            "$ref": "#/definitions/Rule"
+                        }
+                    },
+                    "404": {
+                        "description": "Rule not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get rule by rule_id",
+                "description": "This method returns a rule by rule_id.\n",
+                "parameters": [
+                    {
+                        "name": "rule_id",
+                        "in": "path",
+                        "description": "Unique identifier representing a specific rule.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "creator",
+                        "in": "query",
+                        "description": "Creator of the notification.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Rules"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Rule with rule_id requested",
+                        "schema": {
+                            "$ref": "#/definitions/Rule"
+                        }
+                    },
+                    "404": {
+                        "description": "Rule not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/positions/{user}": {
+            "put": {
+                "summary": "Update position of a user",
+                "description": "This method updates the position of a certain user based on his GPS location.\n",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "User who is sharing his position.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Latitude of the position.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Longitude of the position.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Positions"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Position updated",
+                        "schema": {
+                            "$ref": "#/definitions/Position"
+                        }
+                    },
+                    "304": {
+                        "description": "Position not updated",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "public_identifier": {
+                    "type": "string",
+                    "description": "Public identifier of the user."
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Email of the user."
+                },
+                "pass": {
+                    "type": "string",
+                    "description": "Password of the user."
+                },
+                "first_name": {
+                    "type": "string",
+                    "description": "First name of the user."
+                },
+                "last_surname": {
+                    "type": "string",
+                    "description": "Last name of the user."
+                },
+                "birthday": {
+                    "type": "string",
+                    "description": "Date of the user's birthday."
+                },
+                "imei": {
+                    "type": "string",
+                    "description": "Unique identifier from the user's device."
+                }
+            }
+        },
+        "Geofence": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "Type of the feature"
+                },
+                "geofence_id": {
+                    "type": "string",
+                    "description": "Unique identifier representing a specific geofence."
+                },
+                "properties": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Name of the geofence."
+                        }
+                    }
+                },
+                "geometry": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "description": "Type of the object"
+                        },
+                        "coordinates": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Position"
+                            },
+                            "description": "Pair of coordinates describing positions"
+                        }
+                    }
+                }
+            }
+        },
+        "Notification": {
+            "type": "object",
+            "properties": {
+                "notification_id": {
+                    "type": "string",
+                    "description": "Unique identifier representing a specific notification."
+                },
+                "creator": {
+                    "type": "string",
+                    "description": "Creator of the notification."
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Title of the notification."
+                },
+                "body": {
+                    "type": "string",
+                    "description": "Body of the notification."
+                }
+            }
+        },
+        "Position": {
+            "type": "object",
+            "properties": {
+                "latitude": {
+                    "type": "string",
+                    "description": "Latitude of the point."
+                },
+                "longitude": {
+                    "type": "string",
+                    "description": "Longitude of the point."
+                }
+            }
+        },
+        "Rule": {
+            "type": "object",
+            "properties": {
+                "rule_id": {
+                    "type": "string",
+                    "description": "Unique identifier representing a specific rule."
+                },
+                "near_enter": {
+                    "type": "boolean",
+                    "description": "Near from the geofence, entering."
+                },
+                "near_leave": {
+                    "type": "boolean",
+                    "description": "Near from the geofence, leaving."
+                },
+                "enter": {
+                    "type": "boolean",
+                    "description": "Entering the geofence."
+                },
+                "leave": {
+                    "type": "boolean",
+                    "description": "Leaving the geofence."
+                },
+                "inside": {
+                    "type": "boolean",
+                    "description": "Inside of the geofence."
+                },
+                "distance": {
+                    "type": "integer",
+                    "description": "Distance from the geofence."
+                },
+                "time": {
+                    "type": "integer",
+                    "description": "Time of waiting."
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "body": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
