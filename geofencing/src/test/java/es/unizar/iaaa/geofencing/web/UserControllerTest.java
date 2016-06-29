@@ -97,8 +97,7 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.enabled").value(USER1.getEnabled()))
                 .andExpect(jsonPath("$.role").value(USER1.getRole()))
                 .andExpect(jsonPath("$.lastPasswordResetDate").isNumber())
-                .andExpect(jsonPath("$.notifications").isEmpty())
-                .andExpect(jsonPath("$.geofencesRegistry").isEmpty());
+                .andExpect(jsonPath("$.notifications").isEmpty());
         assertEquals(1, userRepository.count());
     }
 
@@ -128,8 +127,7 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.enabled").value(usuario.getEnabled()))
                 .andExpect(jsonPath("$.role").value(usuario.getRole()))
                 .andExpect(jsonPath("$.lastPasswordResetDate").isNumber())
-                .andExpect(jsonPath("$.notifications").isEmpty())
-                .andExpect(jsonPath("$.geofencesRegistry").isEmpty());
+                .andExpect(jsonPath("$.notifications").isEmpty());
         User usuarioNew = userRepository.findOne(usuario.getId());
         assertEquals(usuario.getBirthday(), usuarioNew.getBirthday());
     }
@@ -170,8 +168,7 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.enabled").value(usuario.getEnabled()))
                 .andExpect(jsonPath("$.role").value(usuario.getRole()))
                 .andExpect(jsonPath("$.lastPasswordResetDate").isNumber())
-                .andExpect(jsonPath("$.notifications").isEmpty())
-                .andExpect(jsonPath("$.geofencesRegistry").isEmpty());
+                .andExpect(jsonPath("$.notifications").isEmpty());
     }
 
     @Test
