@@ -136,7 +136,7 @@ function drawing() {
     drawingManager.setMap(map);
 
     google.maps.event.addListener(drawingManager, "overlaycomplete", function(event) {
-        var lat, lng, coordinates, radius, len, init, i, latNorth, latSouth, lngNorth, lngSouth;
+        var lat, lng, coordinates, radius, radiusLatDeg, radiusLongDeg, len, init, i, latNorth, latSouth, lngNorth, lngSouth;
         if (typeof drawingShape !== 'undefined') {
             drawingShape.setMap(null);
         }
@@ -145,8 +145,10 @@ function drawing() {
             overlayClickListenerCircle(event.overlay);
             lat = event.overlay.getCenter().lat();
             lng = event.overlay.getCenter().lng();
-            radius = event.overlay.getRadius()/100000;
-            coordinates = circle(lat - radius, lng - radius, lat + radius, lng + radius, 40);
+            radius = event.overlay.getRadius() / 1000;
+            radiusLatDeg = (1 / 110.574) * radius;
+            radiusLongDeg = (1 / (121 * Math.cos(lat))) * radius;
+            coordinates = circle(lat - radiusLatDeg, lng - radiusLongDeg, lat + radiusLatDeg, lng + radiusLongDeg, 40);
             console.log(coordinates);
             $('#vertices').val(JSON.stringify([coordinates]));
         } else if (event.type === google.maps.drawing.OverlayType.POLYGON) {
@@ -183,12 +185,14 @@ function drawing() {
 
 function overlayClickListenerCircle(overlay) {
     "use strict";
-    var lat, lng, coordinates, radius;
+    var lat, lng, coordinates, radius, radiusLatDeg, radiusLongDeg;
     google.maps.event.addListener(overlay, "click", function(event){
         lat = overlay.getCenter().lat();
         lng = overlay.getCenter().lng();
-        radius = overlay.getRadius()/100000;
-        coordinates = circle(lat - radius, lng - radius, lat + radius, lng + radius, 40);
+        radius = overlay.getRadius() / 1000;
+        radiusLatDeg = (1 / 110.574) * radius;
+        radiusLongDeg = (1 / (121 * Math.cos(lat))) * radius;
+        coordinates = circle(lat - radiusLatDeg, lng - radiusLongDeg, lat + radiusLatDeg, lng + radiusLongDeg, 40);
         $('#vertices').val(JSON.stringify([coordinates]));
     });
 }
@@ -245,7 +249,7 @@ function circle(x1, y1, x2, y2, nsides) {
     // create ring in CW order
     for (var i = 0; i < nsides; i++) {
         var ang = -(i * angInc);
-        lat = cx + rx / 1.25 * Math.cos(ang);
+        lat = cx + rx * Math.cos(ang);
         lng = cy + ry * Math.sin(ang);
         if(i === 0) {
             init = [lat, lng];
